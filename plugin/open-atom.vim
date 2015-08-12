@@ -23,10 +23,11 @@ function! s:open_atom(file)
     echo "      #             #     #                                                    "
   endif
   let f = len(a:file) > 0 ? fnamemodify(a:file, ':p') : expand('%:p')
+  let opts = get(g:, 'open_atom_unix_options', '')
   if has("win32") || has("win64")
     silent exec "!start cmd /c call atom " . shellescape(f)
   else
-    silent exec "!atom " . shellescape(f) " &"
+    silent exec "!atom " . shellescape(opts) . ' ' . shellescape(f) " &"
   endif
 endfunction
 
